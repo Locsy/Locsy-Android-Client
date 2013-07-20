@@ -1,0 +1,31 @@
+<resources>
+
+    <string name="app_name">Locsy</string>
+    <string name="loading">lade...</string>
+    <string name="menu_settings">Einstellungen</string>
+    <string name="menu_start_service">Automatisches Positions-Update starten</string>
+    <string name="menu_stop_service">Automatisches Positions-Update stoppen</string>
+    <string name="title_activity_main">Locsy</string>
+    <string name="pref_key_username">pref_key_username</string>
+	<string name="pref_username">Benutzername</string>
+	<string name="pref_description_username">Dein Benutzername, um dich beim Location-Server anzumelden</string>
+	<string name="pref_key_password">pref_key_password</string>
+	<string name="pref_password">Passwort</string>
+	<string name="pref_description_password">Dein Passwort, um dich beim Lokation-Server anzumelden</string>
+	<string name="pref_key_server_address">pref_key_server_address</string>
+	<string name="pref_server_address">Server Adresse</string>
+	<string name="pref_description_server_address">Gib hier die Server-Adresse ein, die du von deinem Locsy-Serveradministrator erhalten hast</string>
+	<string name="pref_key_update_interval">pref_key_update_interval</string>
+	<string name="pref_update_interval">Update-Interval</string>
+	<string name="pref_description_update_interval">Update-Intervall für das Senden der Positionen in Sekunden</string>
+	<string name="log_header">Log:</string>
+	<string name="menu_show_hide_log">Log anzeigen/ausblenden</string>
+    <string name="location_updated">Positionen erfolgreich geladen.</string>
+    <string name="location_update_error">Konnte keine Positionen empfangen. Bitte überprüfe deine Internetverbindung.</string>
+    <string name="my_location">Meine Position</string>
+    <string name="your_location">Hier bist du</string>
+    <string name="please_wait">Einen Moment...</string>
+    <string name="loading_locations">Empfange die Positionen von dir und deinen Freunden...</string>
+    <string name="could_not_receive_locations">Problem beim Empfangen der Positionen.</string>
+    <string name="was_here_at" formatted="false">Hier war %s um %s Uhr</string>
+</resources>
