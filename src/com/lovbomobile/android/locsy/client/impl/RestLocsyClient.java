@@ -22,16 +22,13 @@
 
 package com.lovbomobile.android.locsy.client.impl;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
-
+import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 import com.lovbomobile.android.locsy.client.LocsyClient;
+import com.lovbomobile.android.locsy.entities.ParceableLocation;
+import com.lovbomobile.android.locsy.utils.LocationUtils;
+import com.lovbomobile.way.entities.Location;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -43,25 +40,25 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.lovbomobile.android.locsy.entities.ParceableLocation;
-import com.lovbomobile.android.locsy.utils.LocationUtils;
-import com.lovbomobile.way.entities.Location;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 
 public class RestLocsyClient implements LocsyClient {
 
     private static final String MIME_TYPE_JSON = "application/json";
-
     private static final String HEADER_FIELD_ACCEPT = "Accept";
-
     private static final String HEADER_FIELD_CONTENT_TYPE = "Content-Type";
-
     private static final int DEFAULT_TIMEOUT = 10000;
 
     public HashMap<String, ParceableLocation> getFriendsLocation(String userID, String password, String serverAddress) {
         try {
             HttpGet httpGet = getHttpGetRequestForFriendsLocations(userID, password, serverAddress);
+
             HttpClient httpClient = new DefaultHttpClient();
             HttpResponse response = httpClient.execute(httpGet);
 
@@ -71,6 +68,9 @@ public class RestLocsyClient implements LocsyClient {
             }
 
         } catch (IOException e) {
+
+        } catch (IllegalStateException e) {
+
         }
 
         return null;
@@ -84,7 +84,6 @@ public class RestLocsyClient implements LocsyClient {
         httpGet.setParams(httpParams);
         return httpGet;
     }
-
 
     private HashMap<String, ParceableLocation> extractFriendsLocationFromHttpResponse(HttpResponse response) throws IOException {
         HashMap<String, ParceableLocation> friendLocations = null;
@@ -119,8 +118,6 @@ public class RestLocsyClient implements LocsyClient {
         return jsonLocations;
     }
 
-
-
     public void sendLocationToServer(Location location, String userID, String password, String serverAddress) {
         String url = getUpdateLocationUrl(userID, password, serverAddress);
         location.clientTime = System.currentTimeMillis();
@@ -132,7 +129,7 @@ public class RestLocsyClient implements LocsyClient {
             HttpClient httpClient = new DefaultHttpClient();
             HttpResponse response = httpClient.execute(httpPut);
             if (response.getStatusLine().getStatusCode() != 200) {
-                      //TODO what do we want to do here
+                //TODO what do we want to do here
             }
         } catch (Exception e) {
         }
@@ -153,7 +150,6 @@ public class RestLocsyClient implements LocsyClient {
         Gson gson = new Gson();
         return gson.toJson(location);
     }
-
 
     private String getUpdateLocationUrl(String userID, String password, String serverAddress) {
         long timestamp = System.currentTimeMillis();
