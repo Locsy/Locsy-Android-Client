@@ -28,4 +28,5 @@
     <string name="loading_locations">Empfange die Positionen von dir und deinen Freunden...</string>
     <string name="could_not_receive_locations">Problem beim Empfangen der Positionen.</string>
     <string name="was_here_at" formatted="false">Hier war %s um %s Uhr</string>
+    <string name="time_formatter">H:mm</string>
 </resources>

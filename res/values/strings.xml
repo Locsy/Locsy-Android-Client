@@ -27,5 +27,6 @@
     <string name="please_wait">Please Wait</string>
     <string name="loading_locations">Receiving your and your friends locations.</string>
     <string name="could_not_receive_locations">Could not receive locations.</string>
-    <string name="was_here_at" formatted="false">%s was here at %s o\'clock</string>
+    <string name="was_here_at" formatted="false">%s was here at %s</string>
+    <string name="time_formatter">H:mm aaa</string>
 </resources>

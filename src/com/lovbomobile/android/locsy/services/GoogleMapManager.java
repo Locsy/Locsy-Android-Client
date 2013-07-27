@@ -65,9 +65,8 @@ public class GoogleMapManager implements MapManager {
     @Override
     public void updateSingleFriendsLocationOnMap(String friendsName, ParceableLocation friendsLocation) {
         Calendar calendar = getCalendarWithDateSetTo(friendsLocation.clientTime);
-        //logUsersLocationUpdate(friendsName, friendsLocation, calendar);
 
-        if (map != null && friendsLocation.longitude != 0 && friendsLocation.latitude != 0) {
+                if (map != null && friendsLocation.longitude != 0 && friendsLocation.latitude != 0) {
             removeMarkerAndCircleOfFriend(friendsName);
             addMarkerAndAccuracyCircleForFriend(friendsName, friendsLocation, calendar);
 
@@ -105,7 +104,7 @@ public class GoogleMapManager implements MapManager {
     }
 
     private String createMarkerLabelForFriend(String friendsName, Calendar timeOfLocation) {
-        Format format = new SimpleDateFormat("H:mm");
+        Format format = new SimpleDateFormat(resources.getString(R.string.time_formatter));
         String timeString =  format.format(timeOfLocation.getTime());
         return String.format(resources.getString(R.string.was_here_at),friendsName,timeString);
 
