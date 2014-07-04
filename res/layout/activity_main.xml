@@ -4,34 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:background="#202020"
-                  android:layout_width="fill_parent"
-                  android:layout_height="50dp"
-                  android:orientation="horizontal"
-            >
-        <ImageView
-                android:id="@+id/locationServiceStatusIcon"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:src="@drawable/disconnected"
-                android:layout_width="30dp"
-                android:layout_marginLeft="10dp"
-                />
-        <TextView
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/title"
-                android:textSize="18dp"
-                android:textColor="#E0E0E0"
-                android:text="@string/title_activity_main"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:background="@null"
-                android:gravity="center"
-                android:layout_marginLeft="10dp"
-                />
 
-    </LinearLayout>
 
     <TextView
         android:id="@+id/log_header"
@@ -50,8 +23,8 @@
         android:visibility="gone"/>
 	
 	 <fragment
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        xmlns:map="http://schemas.android.com/apk/res-auto"
+        android:name="com.google.android.gms.maps.MapFragment"
+        class="com.google.android.gms.maps.MapFragment"
         android:id="@+id/map"
         android:layout_width="fill_parent"
         android:layout_height="0dp"

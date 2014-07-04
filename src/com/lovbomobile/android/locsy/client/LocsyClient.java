@@ -22,10 +22,11 @@
 
 package com.lovbomobile.android.locsy.client;
 
+import com.lovbomobile.android.locsy.entities.Location;
+import com.lovbomobile.android.locsy.entities.ParceableLocation;
+
 import java.util.HashMap;
 
-import com.lovbomobile.android.locsy.entities.ParceableLocation;
-import com.lovbomobile.way.entities.Location;
 
 public interface LocsyClient {
 

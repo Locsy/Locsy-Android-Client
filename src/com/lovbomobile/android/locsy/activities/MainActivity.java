@@ -23,6 +23,7 @@
 package com.lovbomobile.android.locsy.activities;
 
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
@@ -37,7 +38,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
-import android.support.v4.app.FragmentActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -46,7 +46,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.lovbomobile.android.locsy.R;
 import com.lovbomobile.android.locsy.client.LocsyClient;
@@ -62,7 +62,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class MainActivity extends FragmentActivity implements LocationListener {
+public class MainActivity extends Activity implements LocationListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int SETTINGS_ACTIVITY_REQUEST_CODE = 0;
@@ -73,7 +73,6 @@ public class MainActivity extends FragmentActivity implements LocationListener {
     public LocationServiceConnection serviceConnection = new LocationServiceConnection();
     private TextView infoTextView;
     private ImageButton refreshButton;
-    private ImageView locationServiceStatusIcon;
     private Map<String, View> userButtons;
     private ProgressDialog progressDialog;
     private boolean isMyLocationLoadedTheFirstTime;
@@ -133,12 +132,11 @@ public class MainActivity extends FragmentActivity implements LocationListener {
     }
 
     private void setAndBindLayout() {
-
         setContentView(R.layout.activity_main);
     }
 
     private void initializeLocationServiceStatusIcon() {
-        locationServiceStatusIcon = (ImageView) findViewById(R.id.locationServiceStatusIcon);
+
         if (isLocationServiceRunning()) {
             setLocationServiceStatusIconToEnabled();
         } else {
@@ -147,15 +145,13 @@ public class MainActivity extends FragmentActivity implements LocationListener {
     }
 
     private void setLocationServiceStatusIconToEnabled() {
-        if (locationServiceStatusIcon != null) {
-            locationServiceStatusIcon.setImageResource(R.drawable.connected);
-        }
+        getActionBar().setIcon(R.drawable.connected);
+
     }
 
     private void setLocationServiceStatusIconToDisabled() {
-        if (locationServiceStatusIcon != null) {
-            locationServiceStatusIcon.setImageResource(R.drawable.disconnected);
-        }
+        getActionBar().setIcon(R.drawable.disconnected);
+
     }
 
     private void initializeRefreshButton() {
@@ -198,7 +194,7 @@ public class MainActivity extends FragmentActivity implements LocationListener {
     }
 
     private void initializeMapManager() {
-        GoogleMap map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+        GoogleMap map = ((MapFragment)getFragmentManager().findFragmentById(R.id.map)).getMap();
         mapManager = new GoogleMapManager(map,getResources());
     }
 
@@ -262,8 +258,8 @@ public class MainActivity extends FragmentActivity implements LocationListener {
 
     private void logUsersLocationUpdate(String friendsName, ParceableLocation friendsLocation, Calendar calendar) {
         logFieldLog("user: " + friendsName + " " + calendar.get(Calendar.HOUR_OF_DAY) + ":"
-                + calendar.get(Calendar.MINUTE) + " " + friendsLocation.latitude + " " + friendsLocation.longitude + " ac "
-                + friendsLocation.accuracy);
+                + calendar.get(Calendar.MINUTE) + " " + friendsLocation.getLatitude() + " " + friendsLocation.getLongitude() + " ac "
+                + friendsLocation.getAccuracy());
     }
 
     private void updateMyLocationButton(Location location) {
@@ -415,6 +411,7 @@ public class MainActivity extends FragmentActivity implements LocationListener {
         }
 
         logFieldLog("location service started");
+        Toast.makeText(getApplicationContext(),R.string.info_location_service_started,Toast.LENGTH_SHORT).show();
         setLocationServiceStatusIconToEnabled();
     }
 
@@ -426,6 +423,7 @@ public class MainActivity extends FragmentActivity implements LocationListener {
         }
         getApplicationContext().stopService(new Intent(getApplicationContext(), LocationService.class));
         logFieldLog("location service stopped");
+        Toast.makeText(getApplicationContext(),R.string.info_location_service_stopped,Toast.LENGTH_SHORT).show();
         setLocationServiceStatusIconToDisabled();
     }
 

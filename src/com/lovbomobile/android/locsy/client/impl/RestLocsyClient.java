@@ -26,9 +26,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.lovbomobile.android.locsy.client.LocsyClient;
+import com.lovbomobile.android.locsy.entities.Location;
 import com.lovbomobile.android.locsy.entities.ParceableLocation;
 import com.lovbomobile.android.locsy.utils.LocationUtils;
-import com.lovbomobile.way.entities.Location;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -120,7 +120,7 @@ public class RestLocsyClient implements LocsyClient {
 
     public void sendLocationToServer(Location location, String userID, String password, String serverAddress) {
         String url = getUpdateLocationUrl(userID, password, serverAddress);
-        location.clientTime = System.currentTimeMillis();
+        location.setClientTime(System.currentTimeMillis());
 
         String jsonLocation = getJsonStringFromLocation(location);
 

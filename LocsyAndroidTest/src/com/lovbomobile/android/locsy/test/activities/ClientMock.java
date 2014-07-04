@@ -23,8 +23,8 @@
 package com.lovbomobile.android.locsy.test.activities;
 
 import com.lovbomobile.android.locsy.client.LocsyClient;
+import com.lovbomobile.android.locsy.entities.Location;
 import com.lovbomobile.android.locsy.entities.ParceableLocation;
-import com.lovbomobile.way.entities.Location;
 
 import java.util.HashMap;
 

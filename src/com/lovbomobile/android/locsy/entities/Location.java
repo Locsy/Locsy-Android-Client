@@ -22,46 +22,67 @@
 
 package com.lovbomobile.android.locsy.entities;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+public class Location{
 
-import java.io.Serializable;
 
-public class ParceableLocation extends Location implements Parcelable, Serializable {
 
-	private static final long serialVersionUID = 12348782344L;
+    private double latitude;
 
-	public static final Parcelable.Creator<ParceableLocation> CREATOR = new Parcelable.Creator<ParceableLocation>() {
-		public ParceableLocation createFromParcel(Parcel in) {
-			return new ParceableLocation(in);
-		}
+    private double longitude;
 
-		public ParceableLocation[] newArray(int size) {
-			return new ParceableLocation[size];
-		}
-	};
+    private long clientTime = -1;
 
-	public int describeContents() {
+    private long serverTime = -1;
 
-		return 0;
-	}
+    private float accuracy = 0;
 
-	public ParceableLocation(double latitude, double longitude) {
-		super(latitude, longitude);
-	};
+    public Location() {}
 
-	public ParceableLocation(Parcel in) {
-		setLatitude(in.readDouble());
-		setLongitude(in.readDouble());
-		setClientTime(in.readLong());
-		setServerTime(in.readLong());
-	}
+    public Location(double latitude, double longitude) {
 
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeDouble(getLatitude());
-		dest.writeDouble(getLongitude());
-		dest.writeLong(getClientTime());
-		dest.writeLong(getServerTime());
-	}
+        this.latitude = latitude;
+        this.longitude = longitude;
 
+    }
+
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public long getClientTime() {
+        return clientTime;
+    }
+
+    public void setClientTime(long clientTime) {
+        this.clientTime = clientTime;
+    }
+
+    public long getServerTime() {
+        return serverTime;
+    }
+
+    public void setServerTime(long serverTime) {
+        this.serverTime = serverTime;
+    }
+
+    public float getAccuracy() {
+        return accuracy;
+    }
+
+    public void setAccuracy(float accuracy) {
+        this.accuracy = accuracy;
+    }
 }

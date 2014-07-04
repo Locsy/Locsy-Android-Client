@@ -68,7 +68,14 @@ public class LocationService extends Service implements LocationListener {
     public void onCreate() {
         Log.d(TAG, "Way location service created");
         super.onCreate();
+        ackquireWakeLock();
         requestAndSendCurrentPosition();
+    }
+
+    private void ackquireWakeLock() {
+        PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        PowerManager.WakeLock wakeLock = powerManager.newWakeLock(powerManager.PARTIAL_WAKE_LOCK, "locsy wake lock");
+        wakeLock.acquire(LOCATION_TIMEOUT);
     }
 
     private void requestAndSendCurrentPosition() {
@@ -183,9 +190,8 @@ public class LocationService extends Service implements LocationListener {
             String password = preferences.getString(getString(R.string.pref_key_password), "");
             String serverAddress = preferences.getString(getString(R.string.pref_key_server_address), "");
 
-            com.lovbomobile.way.entities.Location location = new com.lovbomobile.way.entities.Location(
-                    currentLocation.getLatitude(), currentLocation.getLongitude());
-            location.accuracy = currentLocation.getAccuracy();
+            com.lovbomobile.android.locsy.entities.Location location = new com.lovbomobile.android.locsy.entities.Location(currentLocation.getLatitude(), currentLocation.getLongitude());
+            location.setAccuracy(currentLocation.getAccuracy());
 
             LocsyClient locsyClient = new RestLocsyClient();
             locsyClient.sendLocationToServer(location, userID, password, serverAddress);

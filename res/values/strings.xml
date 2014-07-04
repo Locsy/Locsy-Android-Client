@@ -5,6 +5,8 @@
     <string name="menu_settings">Settings</string>
     <string name="menu_start_service">Start Location Service</string>
     <string name="menu_stop_service">Stop Location Service</string>
+    <string name="info_location_service_started">Locsy started to send your location</string>
+    <string name="info_location_service_stopped">Locsy stopped sending your location</string>
     <string name="title_activity_main">Locsy</string>
     <string name="pref_key_username">pref_key_username</string>
 	<string name="pref_username">Username</string>

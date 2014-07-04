@@ -64,9 +64,9 @@ public class GoogleMapManager implements MapManager {
 
     @Override
     public void updateSingleFriendsLocationOnMap(String friendsName, ParceableLocation friendsLocation) {
-        Calendar calendar = getCalendarWithDateSetTo(friendsLocation.clientTime);
+        Calendar calendar = getCalendarWithDateSetTo(friendsLocation.getClientTime());
 
-                if (map != null && friendsLocation.longitude != 0 && friendsLocation.latitude != 0) {
+                if (map != null && friendsLocation.getLongitude() != 0 && friendsLocation.getLatitude() != 0) {
             removeMarkerAndCircleOfFriend(friendsName);
             addMarkerAndAccuracyCircleForFriend(friendsName, friendsLocation, calendar);
 
@@ -85,7 +85,7 @@ public class GoogleMapManager implements MapManager {
     }
 
     private void addMarkerAndAccuracyCircleForFriend(String friendsName, ParceableLocation friendsLocation, Calendar timeOfLocation) {
-        LatLng latLng = new LatLng(friendsLocation.latitude, friendsLocation.longitude);
+        LatLng latLng = new LatLng(friendsLocation.getLatitude(), friendsLocation.getLongitude());
         addMarkerForFriend(friendsName, timeOfLocation, latLng);
         addAccuracyCircleForFriendIfNecessary(friendsName, friendsLocation, latLng);
     }
@@ -111,8 +111,8 @@ public class GoogleMapManager implements MapManager {
     }
 
     private void addAccuracyCircleForFriendIfNecessary(String friendsName, ParceableLocation friendsLocation, LatLng latLng) {
-        if (isAccuracyCircleNeeded(friendsLocation.accuracy)) {
-            friendAccuracyCircles.put(friendsName, addAccuracyCircle(latLng, friendsLocation.accuracy));
+        if (isAccuracyCircleNeeded(friendsLocation.getAccuracy())) {
+            friendAccuracyCircles.put(friendsName, addAccuracyCircle(latLng, friendsLocation.getAccuracy()));
         }
     }
 
